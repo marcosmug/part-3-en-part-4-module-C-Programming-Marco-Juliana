@@ -1,4 +1,4 @@
-﻿namespace part_3_en_part_4_module_C__Programming_Marco_Juliana
+namespace part_3_en_part_4_module_C__Programming_Marco_Juliana
 {
     internal class Program
     {
@@ -13,12 +13,11 @@
                 Console.WriteLine("3 CSVage");
                 Console.WriteLine("4 CSVname");
                 Console.WriteLine("5 CSV maxiumname and age ");
-                Console.WriteLine("6 SumofNumbers");
-                Console.WriteLine("7 Amountandsum");
-                Console.WriteLine("8 Iterating to Input");
-                Console.WriteLine("9 NumbersandCalculations");
-                Console.WriteLine("10 PrintPhrase");
-                Console.WriteLine("11 quit");
+                Console.WriteLine("6 Bookclass");
+                Console.WriteLine("7 reading strings");
+                Console.WriteLine("8 reading int");
+                Console.WriteLine("9 guestlist");
+                Console.WriteLine("10 quit");
 
                 int input = Convert.ToInt32(Console.ReadLine());
                 switch (input)
@@ -45,14 +44,20 @@
                         ReadingStrings();
                         break;
                     case 8:
-                        ReadingIntegers()
+                        ReadingIntegers();
                         break;
                     case 9:
+                        Guestlist();
+                        break;
+                    case 10:
                         running = false;
                         break;
                 }
             }
-            static void Login()
+            
+        }
+
+        static void Login()
             {
                 List<string> loginScreen = new List<string>();
                 loginScreen.Add("jarnee");
@@ -125,6 +130,7 @@
                 Console.WriteLine($"highest age is {highestAge}");
 
             }
+
             static void CSVname()
             {
 
@@ -164,13 +170,14 @@
                 Console.WriteLine(time.Year);
 
             }
-            static void CSVmax() {
+            static void CSVmax()
+            {
                 int highestAge = 0;
                 string longestName = "";
                 List<string> CSdata = new List<string>();
 
                 int year = DateTime.Now.Year;
-                
+
 
                 bool aan = true;
                 while (aan)
@@ -187,25 +194,25 @@
                             if (item == "")
                                 continue;
 
-                            int age = year-Convert.ToInt32(item.Split(",").Last());
+                            int age = year - Convert.ToInt32(item.Split(",").Last());
                             string name = item.Split(",").First();
                             if (highestAge < age)
                             {
                                 highestAge = age;
 
                             }
-                            if (longestName.Length < name.Length) {
+                            if (longestName.Length < name.Length)
+                            {
                                 longestName = name;
-                                
+
                             }
                         }
                     }
                 }
-               Console.WriteLine($"longestname {longestName}");
+                Console.WriteLine($"longestname {longestName}");
                 Console.WriteLine($"highest age: {highestAge}");
             }
-        }
-    }
+
         static void BookClass()
         {
             List<Book> books = new List<Book>();
@@ -293,6 +300,38 @@
                 }
             }
         }
+
+        static void Guestlist() {
+            // Read a text file line by line.
+            while (true)
+            {
+                Console.WriteLine("Enter names, an empty line quits. ");
+                string input = Console.ReadLine();
+
+                if (input == "") {
+                    break;
+                }
+                
+                string[] lines = File.ReadAllLines("C:\\Users\\marco\\Desktop\\part-3-en-part-4-module-C-Programming-Marco-Juliana-master\\part 3 en part 4 module C# Programming Marco Juliana\\names.txt");
+                string[] lines2 = File.ReadAllLines("C:\\Users\\marco\\Desktop\\part-3-en-part-4-module-C-Programming-Marco-Juliana-master\\part 3 en part 4 module C# Programming Marco Juliana\\other-names.txt");
+                List<string> names = new List<string>();   
+                foreach (string line in lines.Concat(lines2).ToArray()) {
+                    names.Add(line);
+
+                }
+                if (names.Contains(input))
+                {
+                    Console.WriteLine("the name is in the list" + input);
+                }
+                else {
+                    Console.WriteLine("name is not in the list");
+                }
+
+            }
+        }
+
+
     }
+}
 
 
