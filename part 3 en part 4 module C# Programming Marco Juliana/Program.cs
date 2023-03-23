@@ -39,6 +39,15 @@
                         CSVmax();
                         break;
                     case 6:
+                        BookClass();
+                        break;
+                    case 7:
+                        ReadingStrings();
+                        break;
+                    case 8:
+                        ReadingIntegers()
+                        break;
+                    case 9:
                         running = false;
                         break;
                 }
@@ -197,47 +206,93 @@
             }
         }
     }
-    static void BookClass()
-    {
-        List<Book> books = new List<Book>();
-
-        while (true)
+        static void BookClass()
         {
-            Console.Write("enter book name: ");
-            string? title = Console.ReadLine();
-            if (string.IsNullOrEmpty(title))
+            List<Book> books = new List<Book>();
+
+            while (true)
             {
-                break;
+                Console.Write("enter book name: ");
+                string? title = Console.ReadLine();
+                if (string.IsNullOrEmpty(title))
+                {
+                    break;
+                }
+
+                Console.Write("enter number of pages: ");
+                int numPages = Convert.ToInt32(Console.ReadLine());
+
+                Console.Write("enter publication year: ");
+                int pubYear = Convert.ToInt32(Console.ReadLine());
+
+                Book book = new Book(title, numPages, pubYear);
+                books.Add(book);
             }
 
-            Console.Write("enter number of pages: ");
-            int numPages = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("what information will be printed? ");
+            string? printoption = Console.ReadLine();
 
-            Console.Write("enter publication year: ");
-            int pubYear = Convert.ToInt32(Console.ReadLine());
-
-            Book book = new Book(title, numPages, pubYear);
-            books.Add(book);
-        }
-
-        Console.WriteLine("what information will be printed? ");
-        string? printoption = Console.ReadLine();
-
-        if (printoption == "everything")
-        {
-            foreach (Book book in books)
+            if (printoption == "everything")
             {
-                Console.WriteLine("{0} ({1} pages, published in {2})", book.Title, book.NumPages, book.PubYear);
+                foreach (Book book in books)
+                {
+                    Console.WriteLine("{0} ({1} pages, published in {2})", book.Title, book.NumPages, book.PubYear);
+                }
+            }
+            else if (printoption == "title")
+            {
+                foreach (Book book in books)
+                {
+                    Console.WriteLine(book.Title);
+                }
             }
         }
-        else if (printoption == "title")
+
+        static void ReadingStrings()
         {
-            foreach (Book book in books)
+            int teller = 0;
+            bool doortellen = true;
+
+            while (doortellen)
             {
-                Console.WriteLine(book.Title);
+                string input = Console.ReadLine();
+
+                if (input == "end")
+                {
+                    doortellen = false;
+                }
+                else
+                {
+                    teller++;
+                }
+            }
+
+            Console.WriteLine($"Je hebt {teller} strings geinput!");
+        }
+
+        static void ReadingIntegers()
+        {
+
+            bool doortellen = true;
+
+            while (doortellen)
+            {
+                string input = Console.ReadLine();
+
+                if (input == "end")
+                {
+                    doortellen = false;
+                }
+                else
+                {
+                    if (int.TryParse(input, out int number))
+                    {
+                        int cube = number * number * number;
+                        Console.WriteLine($"The cube of {number} is {cube}.");
+                    }
+                }
             }
         }
     }
-}
 
 
