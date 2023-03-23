@@ -197,6 +197,47 @@
             }
         }
     }
+    static void BookClass()
+    {
+        List<Book> books = new List<Book>();
+
+        while (true)
+        {
+            Console.Write("enter book name: ");
+            string? title = Console.ReadLine();
+            if (string.IsNullOrEmpty(title))
+            {
+                break;
+            }
+
+            Console.Write("enter number of pages: ");
+            int numPages = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("enter publication year: ");
+            int pubYear = Convert.ToInt32(Console.ReadLine());
+
+            Book book = new Book(title, numPages, pubYear);
+            books.Add(book);
+        }
+
+        Console.WriteLine("what information will be printed? ");
+        string? printoption = Console.ReadLine();
+
+        if (printoption == "everything")
+        {
+            foreach (Book book in books)
+            {
+                Console.WriteLine("{0} ({1} pages, published in {2})", book.Title, book.NumPages, book.PubYear);
+            }
+        }
+        else if (printoption == "title")
+        {
+            foreach (Book book in books)
+            {
+                Console.WriteLine(book.Title);
+            }
+        }
+    }
 }
 
 
